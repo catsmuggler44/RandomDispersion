@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.event.*;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -10,12 +9,12 @@ public class Square extends JButton {
     Game game;
 
     int state = 0;
-    int capacity = 100;
+    int capacity = 10;
     static boolean clicked = false;
     public Square(int X, int Y, Game gamee){
         this.x = X;
         this.y = Y;
-        this.setSize(25, 25);
+        this.setSize(50, 50);
         this.game = gamee;
     }
 
@@ -30,30 +29,33 @@ public class Square extends JButton {
     }
 
     void updateSquare(){
-        System.out.println("bong2");
-        this.setText(this.state+"");
-        double value = (double)state / (double)capacity * 255;
-        System.out.println(value + " state" + state +"   cap" + capacity);
-        int color = (int) value;
+        // this.setText(this.state+"");
+        float color = (float)state / (float)capacity;
+        // System.out.println(color);
+        // System.out.println(value + " state" + state +"   cap" + capacity);
         // System.out.println(color);
         // int color = state * 10;
-        this.setBackground((new Color(255 - color, 255 - color, 255 - color)));
+        
+        this.setBackground(new Color(color, color, color));
         game.frame.repaint();
     }
 
     void PathingAlgorithm(){
         this.state++;
         
-        if (this.state <= capacity){
+        if (this.state < capacity && game.running){
             updateSquare();
             Square sq = null;
             while (sq == null){
                 Random r = new Random();
                 sq = this.game.getSquareAt(r.nextInt(-1, 2) + this.x, r.nextInt(-1 ,2) + this.y);
             }
-            System.out.println("bong1");
-            sq.PathingAlgorithm();
+            
+            sq.PathingAlgorithm();    
+            
             // sleep
+        } else {
+            game.running = false;
         }
     }
 

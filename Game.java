@@ -8,6 +8,7 @@ public class Game extends JFrame implements ActionListener{
     JPanel panel = new JPanel();
     int width;
     int height;
+    boolean running = true;
     public Game(int x, int y){
         this.width = x;
         this.height = y;

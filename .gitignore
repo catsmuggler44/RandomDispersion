@@ -1,5 +1,2 @@
-/Game.class
-/Main.class
-/Square$1.class
-/Square.class
-/main.c
+*.class
+*.c
